@@ -67,7 +67,7 @@ def playerStandings():
         matches: the number of matches the player has played
     """
     db, cursor = connect()
-    cursor.execute('''SELECT * FROM rankings''')
+    cursor.execute("SELECT * FROM rankings")
     rank = cursor.fetchall()
     db.close()
     return rank
@@ -82,7 +82,6 @@ def reportMatch(winner, loser):
     """
     db, cursor = connect()
     cursor.execute("INSERT INTO matches (winner, loser) VALUES(%s, %s)", (winner, loser,))
-    #cursor.execute("INSERT INTO matches (winner, loser) VALUES({winner},{loser})".format(winner=winner, loser=loser))
     db.commit()
     db.close()
  

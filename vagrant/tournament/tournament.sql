@@ -18,8 +18,7 @@ CREATE TABLE players (
 CREATE TABLE matches (
 	match_id serial primary key,
 	winner integer REFERENCES players(id),
-	loser integer REFERENCES players(id),
-	round integer
+	loser integer REFERENCES players(id)
 	);
 
 CREATE VIEW rankings AS

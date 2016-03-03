@@ -19,14 +19,14 @@ def connect(database_name="tournament"):
 def deleteMatches():
     """Remove all the match records from the database."""
     db, cursor = connect()
-    cursor.execute("TRUNCATE TABLE matches")
+    cursor.execute("TRUNCATE TABLE matches CASCADE")
     db.commit()
     db.close()
 
 def deletePlayers():
     """Remove all the player records from the database."""
     db, cursor = connect()
-    cursor.execute("TRUNCATE TABLE players")
+    cursor.execute("TRUNCATE TABLE players CASCADE")
     db.commit()
     db.close()
 
@@ -81,7 +81,8 @@ def reportMatch(winner, loser):
       loser:  the id number of the player who lost
     """
     db, cursor = connect()
-    cursor.execute("INSERT INTO matches (winner, loser) VALUES({winner},{loser})".format(winner=winner, loser=loser))
+    cursor.execute("INSERT INTO matches (winner, loser) VALUES(%s, %s)", (winner, loser,))
+    #cursor.execute("INSERT INTO matches (winner, loser) VALUES({winner},{loser})".format(winner=winner, loser=loser))
     db.commit()
     db.close()
  
